@@ -30,7 +30,7 @@ class ModelTrainer:
     def initiate_model_trainer(self,train_array,test_array):
         try:
             logging.info("spliting to training and test input data")
-            x_train,y_train,x_test,y_test=(
+            X_train,y_train,X_test,y_test=(
                 train_array[:,:-1],
                 train_array[:,-1],
                 test_array[:,:-1],
@@ -83,7 +83,7 @@ class ModelTrainer:
                 
             }
 
-            model_report:dict=evaluate_models(x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,
+            model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
                                              models=models,param=params)
             
             ## To get best model score from dict
@@ -105,7 +105,7 @@ class ModelTrainer:
                 obj=best_model
             )
 
-            predicted=best_model.predict(x_test)
+            predicted=best_model.predict(X_test)
 
             r2_square = r2_score(y_test, predicted)
             return r2_square
